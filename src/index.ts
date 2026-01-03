@@ -60,7 +60,15 @@ function setDetails(map: any, id: string) {
   if (!name) return;
   name.innerHTML = map.name;
   const background = side.querySelector(".background");
-  background?.setAttribute("src", map.versions[0].coverURL);
+  // background?.setAttribute("src", map.versions[0].coverURL);
+  // side.setAttribute(
+  //   "style",
+  //   `background-image: url("${map.versions[0].coverURL}")`
+  // );
+  background?.setAttribute(
+    "style",
+    `background-image: url("${map.versions[0].coverURL}")`
+  );
   const image = side.querySelector(".image");
   image?.setAttribute("src", map.versions[0].coverURL);
 

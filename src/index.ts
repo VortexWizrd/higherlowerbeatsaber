@@ -6,12 +6,16 @@
   setDetails(map1, "map1");
   setDetails(map2, "map2");
 
+  let clicked = false;
+
   const higherButton = document.querySelector("#higher");
   const lowerButton = document.querySelector("#lower");
   const scoreDisplay = document.querySelector("#score");
 
   higherButton?.addEventListener("click", async (event) => {
+    if (clicked) return;
     if (!map1 || !map2) return;
+    clicked = true;
     if (map2.stats.upvotes >= map1.stats.upvotes) {
       score += 1;
     } else {
@@ -23,10 +27,13 @@
     setDetails(map2, "map2");
     if (!scoreDisplay) return;
     scoreDisplay.innerHTML = "Score: " + score;
+    clicked = false;
   });
 
   lowerButton?.addEventListener("click", async (event) => {
+    if (clicked) return;
     if (!map1 || !map2) return;
+    clicked = true;
     if (map2.stats.upvotes <= map1.stats.upvotes) {
       score += 1;
     } else {
@@ -38,6 +45,7 @@
     setDetails(map2, "map2");
     if (!scoreDisplay) return;
     scoreDisplay.innerHTML = "Score: " + score;
+    clicked = false;
   });
 })();
 
@@ -60,11 +68,6 @@ function setDetails(map: any, id: string) {
   if (!name) return;
   name.innerHTML = map.name;
   const background = side.querySelector(".background");
-  // background?.setAttribute("src", map.versions[0].coverURL);
-  // side.setAttribute(
-  //   "style",
-  //   `background-image: url("${map.versions[0].coverURL}")`
-  // );
   background?.setAttribute(
     "style",
     `background-image: url("${map.versions[0].coverURL}")`
